@@ -1,0 +1,338 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300);
+@font-face {
+font-family: SigmarOne;
+src: url("../lib/fonts/sigmar-one.otf") format("opentype");
+}
+
+.clearfix:before, .clearfix:after { display: table; content: ''; }
+.clearfix:after { clear: both; }
+.no-style {
+  color: inherit;
+}
+.no-style:hover {
+  text-decoration: none;
+  color: #A020F0;
+}
+
+body {
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+::selection {
+    background: #A020F0; /* WebKit/Blink Browsers */
+    color: #eee;
+}
+::-moz-selection {
+    background: #A020F0; /* Gecko Browsers */
+    color: #eee;
+}
+#preloader {
+    position: absolute;
+    text-align: center;
+    display: table;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #222;
+    opacity: 1;
+    z-index: 5000;
+    transition: opacity 1s ease-out;
+}
+/* hides from view with fade effect */
+#preloader.loaded {
+    opacity: 0;
+}
+/* hides item from DOM after effect is finished */
+#preloader.hidden {
+    display: none;
+}
+#preloader > div {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.header {
+  text-align: center;
+  position: relative;
+	background: #222;
+  width: 100vw;
+  height: 100vh;
+}
+#three-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.title-block {
+  position: absolute;
+  top: 20vh;
+  width: 50%;
+  z-index: 5;
+  color: #eee;
+  margin-left: auto;
+  margin-right: auto;
+}
+.title-block h1 {
+  font-weight: 100;
+  font-size: 5em;
+}
+.title-block p {
+  font-size: 1.2em;
+  font-weight: 100;
+}
+.content {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+.vr {
+  position: relative;
+  height: 90vh;
+  width: 50%;
+  display: block;
+  background: none;
+  top: 0;
+  left: 0;
+  border-right: 1px dashed #ddd;
+}
+footer {
+  margin: 0 !important; /*To override bootstrap css*/
+  background:#222 !important;
+  border: none !important;
+}
+@media (max-width:992px){
+  .vr {
+    display:none;
+    height: 0;
+  }
+}
+
+
+/************************************************ Intro Effect *****************************************************/
+
+#intro-effect {
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+#enter-site {
+    z-index: 1500;
+    position: absolute;
+    background: none;
+    border: none;
+    color: #eee;
+    bottom: 0;
+    left: 0;
+    font-weight: 100;
+    width: 100%;
+    font-size: 5em;
+    text-align: center;
+    -webkit-transition: font-size .2s ease;
+    transition: font-size .2s ease;
+}
+#enter-site:focus {
+    outline: none;
+}
+#enter-site:hover {
+    font-size: 6em;
+    cursor: pointer;
+}
+
+.intro-effect-push .header,
+.intro-effect-push #page-content,
+.intro-effect-push .content {
+	-webkit-transition-property: opacity, -webkit-transform;
+	transition-property: opacity, transform;
+	-webkit-transition-duration: 1s;
+	transition-duration: 1s;
+}
+
+.intro-effect-push .header {
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	-webkit-transition-duration: 1.2s;
+	transition-duration: 1.2s;
+}
+
+.intro-effect-push .content,
+.intro-effect-push #page-content {
+	-webkit-transform: translateY(400px);
+	transform: translateY(400px);
+	opacity: 0;
+}
+
+.intro-effect-push.modify .content,
+.intro-effect-push.modify #page-content {
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.intro-effect-push.modify .header {
+	opacity: 0;
+	-webkit-transform: translateY(-100%) scale(0.9);
+	transform: translateY(-100%) scale(0.9);
+}
+
+.intro-effect-push.modify .content,
+.intro-effect-push.modify #page-content {
+	-webkit-transition-delay: 0.6s;
+	transition-delay: 0.6s;
+}
+
+
+/****************************************** Loading Effect ***********************************/
+
+@-webkit-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-moz-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-webkit-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-o-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+
+#loader {
+  background: none;
+  position: relative;
+  width: 20vw;
+  height: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+#loader div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border-radius: 50%;
+  border-width: 12px;
+  border-style: solid;
+  -ms-animation: uil-ripple 2s ease-out infinite;
+  -moz-animation: uil-ripple 2s ease-out infinite;
+  -webkit-animation: uil-ripple 2s ease-out infinite;
+  -o-animation: uil-ripple 2s ease-out infinite;
+  animation: uil-ripple 2s ease-out infinite;
+}
+#loader div:nth-of-type(1) {
+  border-color: #afafb7;
+}
+#loader div:nth-of-type(2) {
+  border-color: #5cffd6;
+  -ms-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  -o-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+/****************************************** WHY PAGE QUOTE EFFECT ***********************************/
+
+#why-quote {position:relative; padding-bottom:10px; padding-top:15px;}
+#why-quote:after{content:''; width:100%; height:4px; background:gray; position:absolute; bottom:-4px; left: 0;}
+#why-quote:before{content:''; width:100%; height:4px; background:gray; position:absolute; top:4px; left: 0;}

@@ -1,0 +1,72 @@
+DONE 1. What is Open-Source?
+
+While there are many different types of open-source software, in general, when
+software is open-source, it means that the developer has made the source code, or
+the original code of the application, available for the public to view, use,
+redistribute, and in general learn from. 
+
+DONE 2. Why is it so powerful?
+
+Open-source is extremely powerful because it allows developers to learn from each
+other. One of the best ways to learn to code is by learning from code written by
+experienced developers. This drives powerful collaboration and innovation.
+
+DONE 3. Quotes about open-source
+
+To quote Intel: "open- source software offers a rich, reliable, and well-supported
+path that gives ... the freedom, power, and choice to build and deliver revolutionary
+solutions—faster, better, and at lower cost. Competitors become collaborators, technology
+discoveries are shared, and interoperability becomes a guiding principle."
+-- https://software.intel.com/sites/campaigns/sparks/OpenChoice.php
+
+"Open source is a development method for software that harnesses the power of distributed 
+peer review and transparency of process. The promise of open source is higher quality,
+better reliability, greater flexibility, lower cost, and an end to predatory vendor
+lock-in." -- https://opensource.org/about (OSI)
+
+DONE 4. Who uses it, what is it good for? 
+
+Developers: In the world of website development, open-source is key. Open-source
+giants such as jQuery and Bootstrap, as well as smaller projets like Three.js (put links to individual project highlights)
+drive over 65 million websites. Open-source projects such as these allow developers
+access to the latest innovations in web design.
+
+Companies: Many companies have adopted an open-source standard, and with good reason.
+Not only does it promote inovation, but it also promotes better business. Statistically,
+Open-Source software is more secure than proprietary software, due to the fact that
+it is open to peer review, and this leads to a higher quality product. It also gives
+businesses the freedom and flexibility to use the software to suit their needs, something
+that is restricted by closed-source companies. On top of all this, open-source is more
+cost effective, allowing companies access to cutting edge innovation for free, rather
+than paying thousands for a proprietary installation.
+
+Government: Recently, there has been a push to adopt the open-source model within
+government agencies, specifically in the United States. Open-Source allows agencies
+to customize software to fit their needs, making them more efficient.
+
+5. Fun facts
+
+As of 2011, more than 50% of businesses reportedly use an open-source model, 
+and ofer 60% of all organizations use open-source APIs.and
+
+In 2012, Gartner reported that on average, 29% of deployed code was open source.
+
+In 2015 at least 95% of mainstream IT organizations will leverage open source 
+solutions within mission critical software deployments.
+
+
+
+6. Examples of open-source projects
+
+    jQuery
+    Bootstrap
+    Bootswatch
+    Classie
+    FontAwesome
+    Three.js
+    Modernizr (we aren't using this rn, but we could use it to check WebGL compatibility)
+
+7. Learn more (blog post-style using external links)
+
+
+DONE 8. Meet the team
