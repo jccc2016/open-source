@@ -1,6 +1,17 @@
-// following function from https://coderwall.com/p/fnvjvg/jquery-test-if-element-is-in-viewport
-$.fn.isOnScreen = function(){
+/*
+ * Jake Mitchell
+ * Garrett Mills
+ * 
+ * all code in this page was written by us unless otherwise noted.
+ *
+*/
 
+// Anonymous functions
+
+// following function is from https://coderwall.com/p/fnvjvg/jquery-test-if-element-is-in-viewport
+$.fn.isOnScreen = function(){
+    "use strict";
+    
     var win = $(window);
 
     var viewport = {
@@ -16,7 +27,65 @@ $.fn.isOnScreen = function(){
 
     return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 
-};
+}; // used for detecting if item is on the screen
+
+var pageEffects = new (function () {
+    "use strict";
+    var self = this;
+    
+    self.scrollToId = function (id) {
+        $('html, body').animate({
+            scrollTop: $('#' + id).offset().top
+        }, 1000);
+    };
+    
+    self.addOne = function (counter, max, delta, current) {
+        var old = current;
+        if (old < max) {
+            var newString = '';
+            var newNum = old + delta;
+            
+            if (newNum > 999) {
+                newString = newNum.toString();
+                var formattedString = newString.slice(0,1) + ',' + newString.slice(1);
+                newString = formattedString;
+            } else {
+                newString = newNum.toString();
+            }
+            
+            counter.innerHTML = newString;
+            counter.setAttribute('data-value-current', newNum.toString());
+    
+            setTimeout(function() {
+                self.addOne(counter, max, delta, newNum);
+            }, 50);
+        }
+        return;
+    };
+    
+    var triggered = false; // make sure count up is only called once
+    
+    self.countToMax = function () {
+        if (!triggered) {
+            triggered = true;
+            var counters = $('.counter'),
+                i = 0,
+                counter;
+                
+            for(i; i < counters.length; i+=1) {
+                    counter = counters[i],
+                    max = parseInt(counter.getAttribute('data-value-max'), 10),
+                    delta = parseInt(counter.getAttribute('data-delta'), 10),
+                    cur = parseInt(counter.getAttribute('data-value-current'), 10);
+                
+                cur = cur || 0;
+                self.addOne(counter, max, delta, cur); //RECURSIVELY adds one to each counter until it has reached max
+            }
+        }
+    };
+    
+    return self;
+})(); // Smooth scroller and counter effects
 
 var mLandingEffect = new (function() {
     "use strict";
@@ -26,10 +95,6 @@ var mLandingEffect = new (function() {
       	isAnimating = false,
       	scrollLock = false,
       	container = document.getElementById('intro-effect');
-    
-    // left: 37, up: 38, right: 39, down: 40,
-    // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-    var keys = {32: 1, 37: 1, 38: 1, 39: 1, 40: 1};
     
     self.revealPage = function (reveal) {
       	isAnimating = true;
@@ -60,39 +125,34 @@ var mLandingEffect = new (function() {
       	if (scrollDirection > 0 && !isRevealed) {
       		 self.revealPage(1);
       	}
+      	return false;
     }
     
     function preventDefault(e) {
         e = e || window.event;
         scrollPage(e.deltaY); // take scroll input to reveal site
-        if (e.preventDefault)
+        if (e.preventDefault) {
             e.preventDefault();
+        }
         e.returnValue = false;  
     }
     
-    function preventDefaultForScrollKeys(e) {
-        if (keys[e.keyCode]) {
-            preventDefault(e);
-            return false;
-        }
-    }
-    
     self.disableScroll = function () {
-        if (window.addEventListener) // older FF
+        if (window.addEventListener) {
             window.addEventListener('DOMMouseScroll', preventDefault, false);
-        window.onwheel = preventDefault; // modern standard
-        window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-        window.ontouchmove  = preventDefault; // mobile
-        document.onkeydown  = preventDefaultForScrollKeys;
+        }
+        window.onwheel = preventDefault;
+        window.onmousewheel = document.onmousewheel = preventDefault;
+        window.ontouchmove  = preventDefault;
     };
     
     self.enableScroll = function () {
-        if (window.removeEventListener)
+        if (window.removeEventListener) {
             window.removeEventListener('DOMMouseScroll', preventDefault, false);
+        }
         window.onmousewheel = document.onmousewheel = null; 
         window.onwheel = null; 
-        window.ontouchmove = null;  
-        document.onkeydown = null;  
+        window.ontouchmove = null;
     };
     
     self.lockScroll = function () {
@@ -138,18 +198,24 @@ var mThreeJS = new (function () {
     	var cR = -1; //current Row
     	var cC = 0; // current Column
     	
-    	for (var i = 0; i < plane.geometry.vertices.length; i++) {
-    		var r = Math.max(0, Math.floor(i / numPoints)); // row
+    	var i = 0,
+    	    r, // row
+    	    xH, // x Height sine function
+    	    yH; // y Height sine function
+    	    
+    	for (i; i < plane.geometry.vertices.length; i+=1) {
+    		r = Math.max(0, Math.floor(i / numPoints)); // row
     		if (r == cR) {
-    			cC++;
+    			cC+=1;
     		} else {
     			cR = r;
     			cC = 0;
     		}
-    		var xH = sinFunc(cC, 0, offset, mH, 2);
-    		var yH = sinFunc(cR, 0, offset, mH, 2);
+    		xH = sinFunc(cC, 0, offset, mH, 2);
+    		yH = sinFunc(cR, 0, offset, mH, 2);
     		plane.geometry.vertices[i].z = xH * yH;
     	}
+    	
     	plane.geometry.verticesNeedUpdate = true;
     	
     	renderer.render(scene, camera);
@@ -195,7 +261,7 @@ var mPreLoader = new (function () {
     
     var preloader = document.getElementById('preloader');
     
-    self.start = function () { //document.
+    self.start = function () { // document.ready
         mLandingEffect.lockScroll();
         $("#owl-carousel").owlCarousel({
             autoPlay: 3000, //Set AutoPlay to 3 seconds
@@ -222,88 +288,32 @@ var mPreLoader = new (function () {
     
 })(); // preloader: loading effect for before site is fully loaded
 
-$(window).on('beforeunload', function(){
-  $(window).scrollTop(0);
-}); // scroll to the top of the page before reloading
+
+// Event handlers
 
 $(document).ready(function () { // when you arive on page
     mPreLoader.start();
-});
+}); // turn on preloader
 
 $(window).load(function () { // once everything is loaded
     mPreLoader.finish();
-});
+}); // turn off preloader
+
+$(window).on('resize', function () {
+    mThreeJS.onWindowResize();
+}); // reset WebGL views
 
 $(window).on('scroll', function () {
     if ($('#facts').isOnScreen()) {
-        countToMax();
-    } else {
-        countToZero();
+        pageEffects.countToMax();
     }
-});
+}); // detect when to turn on counters
 
-function scrollToId (id) {
-    $('html, body').animate({
-        scrollTop: $('#' + id).offset().top
-    }, 1000);
-}
+$('#enter-site').on('click', function() { 
+    mLandingEffect.revealPage(1);
+}); // go to page from landing page
 
-function addRecursive (counter, max, delta, current) {
-    var old = parseInt(counter.innerHTML);
-    if (current) {
-        old = current;
-    }
-    if (old < max) {
-        var newString = '';
-        var newNum = old + delta;
-        if (newNum > 999) {
-            newString = newNum.toString();
-            var formattedString = newString.slice(0,1) + ',' + newString.slice(1);
-            newString = formattedString;
-        } else {
-            newString = newNum.toString();
-        }
-        counter.innerHTML = newString;
-        if (current) {
-            counter.setAttribute('data-value-current', newNum);
-        }
-        setTimeout(function() {
-            addRecursive(counter, max, delta);
-        }, 50);
-    }
-    return;
-}
-var triggered = false;
+$('#reveal').on('click', function() {
+    mLandingEffect.revealPage(0);
+}); // go to landing page from home page
 
-function countToZero () {
-    if (triggered) {
-        var counters = $('.counter');
-        for(var i = 0; i < counters.length; i++) {
-            var counter = counters[i];
-            counter.innerHTML = '0';
-        }
-        triggered = !triggered;
-    }
-}
-
-function countToMax () {
-    if (!triggered) {
-        triggered = !triggered;
-        var counters = $('.counter');
-        for(var i = 0; i < counters.length; i++) {
-            var counter = counters[i],
-                max = parseInt(counter.getAttribute('data-value-max')),
-                delta = parseInt(counter.getAttribute('data-delta')),
-                cur = parseInt(counter.getAttribute('data-value-current'));
-            
-            cur = cur || null;
-            addRecursive(counter, max, delta, cur);
-        }
-    }
-}
-
-
-// adds event handlers
-document.getElementById('enter-site').addEventListener('click', function() { mLandingEffect.revealPage(1); });
-document.getElementById('reveal').addEventListener('click', function() { mLandingEffect.revealPage(0); });
-window.addEventListener('resize', function () { mThreeJS.onWindowResize(); }, false);

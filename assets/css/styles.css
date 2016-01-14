@@ -1,12 +1,24 @@
+/*
+ * Jake Mitchell
+ * Garrett Mills
+ * 
+ * all code in this page was written by us unless otherwise noted.
+ *
+*/
+
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300);
+
+/******************************************** Generic page styles ***********************************************/
+
 @font-face {
-font-family: SigmarOne;
-src: url("../lib/fonts/sigmar-one.otf") format("opentype");
+  font-family: SigmarOne;
+  src: url("../lib/fonts/sigmar-one.otf") format("opentype");
 }
 
 .clearfix:before, .clearfix:after { display: table; content: ''; }
 .clearfix:after { clear: both; }
+
 .no-style {
   color: inherit;
 }
@@ -94,6 +106,9 @@ body {
   top: 0;
   width: 100vw;
 }
+.info-block > p {
+  margin-bottom: 30px;
+}
 
 .vr {
   position: relative;
@@ -105,11 +120,12 @@ body {
   left: 0;
   border-right: 1px dashed #ddd;
 }
-footer {
-  margin: 0 !important; /*To override bootstrap css*/
+footer { /* !important used to override bootstrap css*/
+  margin: 0 !important; 
   background:#222 !important;
   border: none !important;
 }
+
 @media (max-width:992px){
   .vr {
     display:none;

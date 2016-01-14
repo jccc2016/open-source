@@ -1,3 +1,10 @@
+/*
+ * Jake Mitchell
+ * Garrett Mills
+ * 
+ * all code in this page was written by us unless otherwise noted.
+ *
+*/
 
 var mPreLoader = new (function () {
     "use strict";
@@ -17,10 +24,6 @@ var mPreLoader = new (function () {
     
 })(); // preloader: loading effect for before site is fully loaded
 
-$(window).on('beforeunload', function(){
-  $(window).scrollTop(0);
-});
-
 $(window).load(function () { // once everything is loaded
     mPreLoader.finish();
-});
+}); // turn off preloader

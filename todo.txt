@@ -44,7 +44,7 @@ Government: Recently, there has been a push to adopt the open-source model withi
 government agencies, specifically in the United States. Open-Source allows agencies
 to customize software to fit their needs, making them more efficient.
 
-5. Fun facts
+DONE 5. Fun facts
 
 As of 2011, more than 50% of businesses reportedly use an open-source model, 
 and ofer 60% of all organizations use open-source APIs.and
@@ -64,7 +64,6 @@ solutions within mission critical software deployments.
     Classie
     FontAwesome
     Three.js
-    Modernizr (we aren't using this rn, but we could use it to check WebGL compatibility)
 
 7. Learn more (blog post-style using external links)
 
